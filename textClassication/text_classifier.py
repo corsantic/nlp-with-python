@@ -55,6 +55,9 @@ X = transformer.fit_transform(X).toarray()
 from sklearn.model_selection import train_test_split
 text_train,text_test,sent_train,sent_test = train_test_split(X,y,test_size = 0.2,random_state = 0)
 
+from sklearn.linear_model import LogisticRegression
+classifier = LogisticRegression()
+classifier.fit(text_train,sent_train)
 
 
 
