@@ -41,5 +41,22 @@ for i in range(0,len(X)):
     review = re.sub(r'\s+',' ',review)
     corpus.append(review)
 
+#Bag of Words model
+from sklearn.feature_extraction.text import CountVectorizer
+vectorizer = CountVectorizer(max_features=2000,min_df= 3, max_df=0.6,stop_words = stopwords.words('english'))
+X = vectorizer.fit_transform(corpus).toarray()
+
+# TF-IDF model
+from sklearn.feature_extraction.text import TfidfTransformer
+transformer = TfidfTransformer()
+X = transformer.fit_transform(X).toarray()
+
+
+
+
+
+
+
+
         
 
