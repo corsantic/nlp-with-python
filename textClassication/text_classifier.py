@@ -60,6 +60,13 @@ classifier = LogisticRegression()
 classifier.fit(text_train,sent_train)
 
 
+sent_pred = classifier.predict(text_test)
+
+from sklearn.metrics import confusion_matrix
+cm = confusion_matrix(sent_test,sent_pred)
+
+
+
 
 
 
