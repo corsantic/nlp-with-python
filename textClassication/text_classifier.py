@@ -79,7 +79,16 @@ with open('classifier.pickle','wb') as f:
 with open('tfidfmodel.pickle','wb') as f:
     pickle.dump(vectorizer,f)
 
+# Unpickling the classifier and vectorizer
+with open('classifier.pickle','rb') as f:
+     clf = pickle.load(f)
+     
+with open ('tfidfmodel.pickle','rb') as f:
+    tfidf = pickle.load(f)
 
+sample= ["You are a nice person man, have a good life"]
+sample = tfidf.transform(sample).toarray()
+print(clf.predict(sample))
 
 
 
