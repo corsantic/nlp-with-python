@@ -41,7 +41,7 @@ for i in range(0,len(X)):
     review = re.sub(r'\s+',' ',review)
     corpus.append(review)
 
-#Bag of Words model
+# Bag of Words model
 from sklearn.feature_extraction.text import CountVectorizer
 vectorizer = CountVectorizer(max_features=2000,min_df= 3, max_df=0.6,stop_words = stopwords.words('english'))
 X = vectorizer.fit_transform(corpus).toarray()
@@ -50,6 +50,12 @@ X = vectorizer.fit_transform(corpus).toarray()
 from sklearn.feature_extraction.text import TfidfTransformer
 transformer = TfidfTransformer()
 X = transformer.fit_transform(X).toarray()
+
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+vectorizer = TfidfVectorizer(max_features=2000,min_df= 3, max_df=0.6,stop_words = stopwords.words('english'))
+X = vectorizer.fit_transform(corpus).toarray()
+
 
 
 from sklearn.model_selection import train_test_split
@@ -64,6 +70,15 @@ sent_pred = classifier.predict(text_test)
 
 from sklearn.metrics import confusion_matrix
 cm = confusion_matrix(sent_test,sent_pred)
+
+# Pickling the classifier
+with open('classifier.pickle','wb') as f:
+    pickle.dump(classifier,f)
+
+# Pickling the vectorizer
+with open('tfidfmodel.pickle','wb') as f:
+    pickle.dump(vectorizer,f)
+
 
 
 
