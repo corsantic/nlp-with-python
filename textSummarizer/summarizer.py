@@ -26,3 +26,14 @@ clean_text = re.sub(r'\s+',' ',clean_text)
 sentences = nltk.sent_tokenize(text)
 
 stop_words = nltk.corpus.stopwords.words('english')
+
+word2count = {}
+for word in nltk.word_tokenize(clean_text):
+    if word not in stop_words:
+        if word not in word2count.keys():
+            word2count[word] = 1
+        else:
+            word2count[word] += 1
+            
+for key in word2count.keys():
+    word2count[key] = word2count[key]/max(word2count.values())
