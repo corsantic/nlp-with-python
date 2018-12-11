@@ -16,6 +16,7 @@ for paragraph in soup.find_all('p'):
 
 
 # Preprocessing the text
+
 text = re.sub(r'\s+',' ',text)
 clean_text = text.lower()
 clean_text = re.sub(r'\W',' ',clean_text)
