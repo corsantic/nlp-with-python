@@ -4,8 +4,9 @@ import urllib.request
 import re
 import nltk
 nltk.download('stopwords')
+import heapq
 
-source = urllib.request.urlopen('https://www.bbc.com/news/technology-46516662')
+source = urllib.request.urlopen('https://www.livescience.com/64270-animals-suffocated-permian-extinction.html')
 
 soup  = bs.BeautifulSoup(source, 'lxml')
 
@@ -15,7 +16,6 @@ for paragraph in soup.find_all('p'):
 
 
 # Preprocessing the text
-text = re.sub(r'Share this withEmailFacebookMessengerMessengerTwitterPinterestWhatsAppLinkedInCopy this linkThese are external links and will open in a new window',' ',text)
 text = re.sub(r'\s+',' ',text)
 clean_text = text.lower()
 clean_text = re.sub(r'\W',' ',clean_text)
@@ -37,3 +37,27 @@ for word in nltk.word_tokenize(clean_text):
             
 for key in word2count.keys():
     word2count[key] = word2count[key]/max(word2count.values())
+    
+sent2score = {}
+
+for sentence in sentences:
+    for word in nltk.word_tokenize(sentence.lower()):
+        if word in word2count.keys():
+            if len(sentence.split(' '))< 25:
+                if sentence not in sent2score.keys():
+                    sent2score[sentence] = word2count[word]
+                else:
+                    sent2score[sentence] += word2count[word]
+            
+best_sentences = heapq.nlargest(5,sent2score,key = sent2score.get)
+    
+print ('-----------------------------------------------------------------------')
+
+for sentence in best_sentences:
+    print (sentence)
+    print("\n")
+    
+    
+    
+    
+    
