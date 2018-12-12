@@ -27,12 +27,12 @@ When I had moved to France I had became friend with the duke of France and I had
  
 sentences = nltk.sent_tokenize(paragraph)
  
- stemmer = ps()
+stemmer = ps()
  
  
  # Stemming
  
- for i in range(len(sentences)):
+for i in range(len(sentences)):
      words = nltk.word_tokenize(sentences[i])
      newWords = [stemmer.stem(word) for  word in words]
      sentences[i] = ' '.join(newWords)

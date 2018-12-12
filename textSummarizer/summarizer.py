@@ -6,7 +6,7 @@ import nltk
 nltk.download('stopwords')
 import heapq
 
-source = urllib.request.urlopen('https://www.livescience.com/64270-animals-suffocated-permian-extinction.html')
+source = urllib.request.urlopen('http://www.takepart.com/flashcards/what-is-climate-change/index.html')
 
 soup  = bs.BeautifulSoup(source, 'lxml')
 
